@@ -34,8 +34,5 @@ class App extends Model
          return $this->name;
     }
 
-
-    public function toJson(){
-        
-    }
+ 
 }

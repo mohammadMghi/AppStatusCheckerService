@@ -3,7 +3,8 @@
 namespace App\Jobs;
 
 use App\Entities\App;
-use App\Facades\GooglePlayFacade;
+use App\Facades\AppStoreApiFacade;
+use App\Facades\AppStoreFacade;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -11,7 +12,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class CheckGooglePlayHourlyJob implements ShouldQueue
+class CheckAppStoreEveryTwoHoures implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -20,8 +21,7 @@ class CheckGooglePlayHourlyJob implements ShouldQueue
      */
     public function __construct(App $app)
     {
-       
-        GooglePlayFacade::handle($app);
+        AppStoreApiFacade::handle($app);
     }
 
     /**
