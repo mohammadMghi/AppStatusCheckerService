@@ -16,7 +16,7 @@ class AppStoreApiHandler
     public function __construct(AppStoreStatus $appStoreStatus){
         $this->appStoreStatus = $appStoreStatus;
     }
-    public function handle(App $app): void
+    public function handle(App $app) 
     {
         
         //sends request to app store for get status
@@ -29,6 +29,6 @@ class AppStoreApiHandler
         //checks two hours later
 
 
-        return ;
+        return $response->json();
     }
 }

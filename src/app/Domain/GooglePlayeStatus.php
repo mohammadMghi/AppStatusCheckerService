@@ -20,18 +20,8 @@ class GooglePlayeStatus
 
  
         if($response->status() == 200){
-
-     
-                foreach( $stausJsonResponse as $key => $value)
-                {
-
-                    ChangeState::dispatch($key["subscription"]);
-                
-                }
-
-
-             return;
-            
+            ChangeState::dispatch($stausJsonResponse["status"]);
+            return;
         } 
 
         dispatch(new CheckGooglePlayHourlyJob($app));

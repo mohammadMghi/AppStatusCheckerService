@@ -25,10 +25,11 @@ class GooglePlayApiHandler
             'name' => $app->getName(),
         ]);
         
-        $json = $response->json();
+   
 
         $this->googlePlayeStatusChacker->chacker($response , $app);
 
-        return $json;
+ 
+        return $response->json();
     }
 }

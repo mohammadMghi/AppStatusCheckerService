@@ -18,11 +18,9 @@ class AppStoreStatus
  
         if($response->status() == 200)
         {
-
-                foreach( $stausJsonResponse as $key => $value) 
-                {
-                    ChangeState::dispatch($key["subscription"]);
-                }
+ 
+            ChangeState::dispatch($stausJsonResponse["subscription"]);
+  
  
             return;
             
