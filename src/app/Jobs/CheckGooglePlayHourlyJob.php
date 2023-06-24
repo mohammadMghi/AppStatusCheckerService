@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Entities\App;
+use App\Models\App;
 use App\Facades\GooglePlayFacade;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;

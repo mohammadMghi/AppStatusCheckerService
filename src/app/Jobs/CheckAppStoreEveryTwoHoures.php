@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Entities\App;
+use App\Models\App;
 use App\Facades\AppStoreApiFacade;
 use App\Facades\AppStoreFacade;
 use Illuminate\Bus\Queueable;
@@ -16,12 +16,13 @@ class CheckAppStoreEveryTwoHoures implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    var App $app;
     /**
      * Create a new job instance.
      */
     public function __construct(App $app)
     {
-        AppStoreApiFacade::handle($app);
+        $this->app = $app;
     }
 
     /**
@@ -29,6 +30,6 @@ class CheckAppStoreEveryTwoHoures implements ShouldQueue
      */
     public function handle(): void
     {
-        //
+        AppStoreApiFacade::handle($this->app);
     }
 }

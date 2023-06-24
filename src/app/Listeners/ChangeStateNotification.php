@@ -2,16 +2,23 @@
 
 namespace App\Listener;
 
+use App\Log\LogStateHandler;
+use App\Notification\Email\EmailHandler;
 use ChangeState;
 use Illuminate\Support\Facades\Mail;
+use Monolog\Handler\MailHandler;
 
 class ChangeStateNotification{
-       /**
+    var EmailHandler $emailHandler; 
+    var LogStateHandler $logStateHandler;
+    
+    /**
      * Create the event listener.
      */
-    public function __construct( )
+    public function __construct(EmailHandler $emailHandler ,LogStateHandler $logStateHandler  )
     {
-        // ...
+        $this->emailHandler  = $emailHandler;
+        $this->logStateHandler = $logStateHandler;
     }
  
     /**
@@ -19,14 +26,13 @@ class ChangeStateNotification{
      */
     public function handle(ChangeState $event): void
     {
-        $message = 'Status : ' . $event->status;
+        
         //send email
-        $data = array('name'=>"Virat Gandhi");
-   
-        Mail::send(['text'=>'mail'], $data, function($message) {
-           $message->to('admin@gmail.com', 'Admin')->subject
-              ($message);
-           $message->from('server@gmail.com','Mohammad');
-        });
+        $this->emailHandler->send($event);
+
+
+        //log
+        $this->logStateHandler->store($event);
+
     }
 }

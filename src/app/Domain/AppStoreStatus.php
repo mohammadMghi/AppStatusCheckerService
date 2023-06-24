@@ -1,13 +1,11 @@
 <?php
 namespace App\Domain;
 
-use App\Jobs\CheckGooglePlayHourlyJob;
+use App\Jobs\CheckAppStoreEveryTwoHoures;
 use ChangeState;
 use Illuminate\Support\Facades\Redis;
 
-
-//This class responsible for checking status code and decide base on it
-class GooglePlayeStatus
+class AppStoreStatus
 {
 
     public function chacker($response , $app)
@@ -19,33 +17,33 @@ class GooglePlayeStatus
 
         $preStatus = Redis::get('subscription_status');
  
-        if($response->status() == 200){
+        if($response->status() == 200)
+        {
 
      
-            foreach( $stausJsonResponse as $key => $value)
+            foreach( $stausJsonResponse as $key => $value) 
             {
                 
                 //dispatch event for persist log and send email
-                ChangeState::dispatch($key["subscription"]);
+              
                 
                 if($key["subscription"] == "expired")
-
                 {
-
-                    ChangeState::dispatch($key["subscription"]);
-
+                 
+                    if($preStatus == "active")
+                    {
+                        ChangeState::dispatch($key["subscription"]);
+                    }
+               
+             
                 }
-                
              }
-
 
              return;
             
         } 
 
-        dispatch(new CheckGooglePlayHourlyJob($app));
+
+        dispatch(new CheckAppStoreEveryTwoHoures($app));
     }
-
-
 }
-
