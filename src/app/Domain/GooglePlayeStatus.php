@@ -17,26 +17,17 @@ class GooglePlayeStatus
 
         $stausJsonResponse = json_decode($json);
 
-        $preStatus = Redis::get('subscription_status');
+
  
         if($response->status() == 200){
 
      
-            foreach( $stausJsonResponse as $key => $value)
-            {
-                
-                //dispatch event for persist log and send email
-                ChangeState::dispatch($key["subscription"]);
-                
-                if($key["subscription"] == "expired")
-
+                foreach( $stausJsonResponse as $key => $value)
                 {
 
                     ChangeState::dispatch($key["subscription"]);
-
-                }
                 
-             }
+                }
 
 
              return;

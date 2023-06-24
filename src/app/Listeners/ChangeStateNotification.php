@@ -6,6 +6,7 @@ use App\Log\LogStateHandler;
 use App\Notification\Email\EmailHandler;
 use ChangeState;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redis;
 use Monolog\Handler\MailHandler;
 
 class ChangeStateNotification{
@@ -26,12 +27,10 @@ class ChangeStateNotification{
      */
     public function handle(ChangeState $event): void
     {
-        
-        //send email
-        $this->emailHandler->send($event);
+        $preStatus = Redis::get('subscription_status');
 
+        if($event == "expired" && $preStatus == "active") $this->emailHandler->send($event);
 
-        //log
         $this->logStateHandler->store($event);
 
     }

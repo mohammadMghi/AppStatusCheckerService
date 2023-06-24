@@ -4,7 +4,7 @@ namespace App\Facades\Handlers;
 
 use App\Domain\GooglePlayeStatus;
 use App\Domain\GooglePlayeStatusChacker;
-use App\Entities\App;
+use App\Models\App;
 use App\Jobs\CheckGooglePlayHourlyJob;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\Facades\Http;

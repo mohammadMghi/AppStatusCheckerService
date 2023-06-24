@@ -15,31 +15,16 @@ class AppStoreStatus
 
         $stausJsonResponse = json_decode($json);
 
-        $preStatus = Redis::get('subscription_status');
  
         if($response->status() == 200)
         {
 
-     
-            foreach( $stausJsonResponse as $key => $value) 
-            {
-                
-                //dispatch event for persist log and send email
-              
-                
-                if($key["subscription"] == "expired")
+                foreach( $stausJsonResponse as $key => $value) 
                 {
-                 
-                    if($preStatus == "active")
-                    {
-                        ChangeState::dispatch($key["subscription"]);
-                    }
-               
-             
+                    ChangeState::dispatch($key["subscription"]);
                 }
-             }
-
-             return;
+ 
+            return;
             
         } 
 
