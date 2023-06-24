@@ -27,13 +27,10 @@ class AppStoreApiHandler
 
             foreach( $stausJsonResponse as $key => $value) {
 
-
-                //if status change from active to expired must be reported to admin (Event base)
-                //persist last status on redis for checks with new got status
-                //get last status from redis
-                $PreStatus = Redis::get('subscription_status');
+ 
+                $preStatus = Redis::get('subscription_status');
                 
-                if($PreStatus ){
+                if($preStatus ){
 
                 }
 

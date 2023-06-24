@@ -24,17 +24,10 @@ class GooglePlayApiHandler
             'id' => $app->getID(),
             'name' => $app->getName(),
         ]);
-
         
         $json = $response->json();
 
-
-        $PreStatus = Redis::get('subscription_status');
-
-
         $this->googlePlayeStatusChacker->chacker($response , $app);
-   
-
 
         return $json;
     }
