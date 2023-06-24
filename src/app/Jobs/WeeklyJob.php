@@ -32,6 +32,7 @@ class WeeklyJob implements ShouldQueue
     public function handle(): void
     {
         AppStoreApiFacade::handle($this->app);
+        
         GooglePlayFacade::handle($this->app);
     }
 }

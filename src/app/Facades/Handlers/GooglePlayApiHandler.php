@@ -19,7 +19,7 @@ class GooglePlayApiHandler
 
     public function handle(App $app) 
     {
-    
+        //sends request to google play for get status
         $response = Http::get('http://googlePlay.com', [
             'id' => $app->getID(),
             'name' => $app->getName(),

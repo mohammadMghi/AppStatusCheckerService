@@ -9,6 +9,6 @@ class AppstroreStatusContoller extends Controller
     //
 
     public function  check(){
-
+        
     }
 }
