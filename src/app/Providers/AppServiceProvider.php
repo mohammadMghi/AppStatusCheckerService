@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
+use App\Facades\AppStoreApiFacade;
 use App\Facades\AppStoreFacade;
-use App\Facades\GooglePlayApiFacade;
+ 
 use App\Facades\GooglePlayFacade;
 use Illuminate\Support\ServiceProvider;
 
@@ -19,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->app->bind('appStore-api', function ($app) {
-            return new AppStoreFacade();
+            return new AppStoreApiFacade();
         });
     }
 
