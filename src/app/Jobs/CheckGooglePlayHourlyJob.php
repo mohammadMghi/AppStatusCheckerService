@@ -14,14 +14,14 @@ use Illuminate\Queue\SerializesModels;
 class CheckGooglePlayHourlyJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
+    var App $app;
     /**
      * Create a new job instance.
      */
     public function __construct(App $app)
     {
-       
-        GooglePlayFacade::handle($app);
+       $this->app = $app;
+        
     }
 
     /**
@@ -29,6 +29,6 @@ class CheckGooglePlayHourlyJob implements ShouldQueue
      */
     public function handle(): void
     {
-        //
+        GooglePlayFacade::handle($this->app);
     }
 }

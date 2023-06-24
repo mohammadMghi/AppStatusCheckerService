@@ -9,9 +9,8 @@ class ChangeState{
 
     var string $status;
 
-    public function __construct(
-          String $status,
-    ) {
+    public function __construct( String $status)
+    {
         $this->status = $status;
     }
 }

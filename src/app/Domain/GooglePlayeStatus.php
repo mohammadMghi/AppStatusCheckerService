@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Redis;
 
 
 //This class responsible for checking status code and decide base on it
-class GooglePlayeStatus
+class GooglePlayeStatus implements StatusContract
 {
 
     public function chacker($response , $app)
@@ -19,9 +19,12 @@ class GooglePlayeStatus
 
 
  
-        if($response->status() == 200){
+        if($response->getStatusCode() == 200){
+
             ChangeState::dispatch($stausJsonResponse["status"]);
+
             return;
+            
         } 
 
         dispatch(new CheckGooglePlayHourlyJob($app));

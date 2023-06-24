@@ -5,7 +5,7 @@ use App\Jobs\CheckAppStoreEveryTwoHoures;
 use ChangeState;
 use Illuminate\Support\Facades\Redis;
 
-class AppStoreStatus
+class AppStoreStatus implements StatusContract
 {
 
     public function chacker($response , $app)
@@ -16,7 +16,7 @@ class AppStoreStatus
         $stausJsonResponse = json_decode($json);
 
  
-        if($response->status() == 200)
+        if($response->getStatusCode() == 200)
         {
  
             ChangeState::dispatch($stausJsonResponse["subscription"]);

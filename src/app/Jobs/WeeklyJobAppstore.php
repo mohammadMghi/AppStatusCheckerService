@@ -18,8 +18,9 @@ class WeeklyJobAppstore implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(App $app)
+    public function __construct(App $app = null)
     {
+       
         $this->app = $app ;
     }
 
