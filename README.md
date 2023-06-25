@@ -11,7 +11,7 @@ $ cd src
 $ cp .env.example .env //configure your env
 $ php artisan migrate
 $ php artisan db:seed
-// note : Configure the cron task scheduler laravel
+// note : Configure the cron 
 $ php artisan serve //run laravel with artisan
 ```
 
