@@ -11,7 +11,10 @@ class LogStateHandler{
     public function store($event){
         
    
-        $count = Redis::get('expired_count' , 0);
+        $count = Redis::get('expired_count');
+        if($count == null){
+            $count = 0;
+        }
 
         if($event == "expired" )
         {

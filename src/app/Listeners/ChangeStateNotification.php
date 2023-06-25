@@ -2,17 +2,18 @@
 
 namespace App\Listener;
 
+use App\Events\ChangeState;
 use App\Log\LogContract;
 use App\Log\LogStateHandler;
 use App\Notification\Email\EmailContract;
 use App\Notification\Email\EmailHandler;
-use ChangeState;
+ 
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redis;
 use Monolog\Handler\MailHandler;
 
 class ChangeStateNotification{
-    var EmailHandler $email; 
+    var EmailContract $email; 
     var LogContract $logger;
     
     /**
@@ -30,7 +31,7 @@ class ChangeStateNotification{
     public function handle(ChangeState $event): void
     {
      
-
+       
         $this->email->send($event->status);
 
         $this->logger->store($event);

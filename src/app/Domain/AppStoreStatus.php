@@ -25,6 +25,7 @@ class AppStoreStatus implements StatusContract
  
         if($response->getStatusCode() == SUCCESS_STATUS_CODE)
         {
+            ChangeState::dispatch("tessst");
  
             if ($stausJsonResponse != null) ChangeState::dispatch($stausJsonResponse["subscription"]);
   

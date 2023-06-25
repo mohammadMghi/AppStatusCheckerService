@@ -30,13 +30,11 @@ class WeeklyJobGooglePlay implements ShouldQueue
      */
     public function handle(): void
     {
-    
-        $googlePlayApps = App::where('platform', 'Android')->get();
 
-        foreach($googlePlayApps as $app){
+        foreach (App::where('platform', 'Android')->cursor() as $app) {
+     
             GooglePlayFacade::handle($app);
         }
-        
- 
+  
     }
 }
