@@ -16,6 +16,7 @@ use App\Log\LogContract;
 use App\Log\LogStateHandler;
 use App\Notification\Email\EmailContract;
 use App\Notification\Email\EmailHandler;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,15 +27,8 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
     
-        $this->app->bind(AppStoreApiHandler::class, function ($app) {
-            $appStoreStatus = $app->bind(StatusContract::class , AppStoreStatus::class);
-            return new AppStoreApiHandler($appStoreStatus);
-        });
-
-        $this->app->bind(GooglePlayApiHandler::class, function ($app) {
-            $schedule = $app->make(Schedule::class);
-            return new GooglePlayApiHandler($schedule);
-        });
+      
+ 
 
 
         $this->app->bind(ChangeStateNotification::class, function ($app) {
@@ -46,11 +40,12 @@ class AppServiceProvider extends ServiceProvider
         
         $this->app->bind('googlePlay-api', function ($app) {
          
-            return new GooglePlayFacade();
+            return new GooglePlayApiHandler(new GooglePlayeStatus(new Schedule()));
         });
 
         $this->app->bind('appStore-api', function ($app) {
-            return new AppStoreApiFacade();
+ 
+            return new AppStoreApiHandler(new AppStoreStatus(new Schedule()));
         });
     }
 

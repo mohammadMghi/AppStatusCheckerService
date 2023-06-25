@@ -4,11 +4,11 @@ namespace App\Domain;
 use App\Helper\CustomScheduler;
 use App\Jobs\CheckGooglePlayHourlyJob;
 use App\Jobs\WeeklyJobAppstore;
-use ChangeState;
+use App\Events\ChangeState;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\Redis;
 
-const SUCCESS_STATUS_CODE = 200;
+ 
 //This class responsible for checking status code and decide base on it
 class GooglePlayeStatus implements StatusContract
 {
@@ -29,7 +29,7 @@ class GooglePlayeStatus implements StatusContract
  
         if($response->getStatusCode() == SUCCESS_STATUS_CODE){
 
-            ChangeState::dispatch($stausJsonResponse["status"]);
+            if($stausJsonResponse != null) ChangeState::dispatch($stausJsonResponse["status"]);
 
             return;
 

@@ -2,10 +2,11 @@
 namespace App\Domain;
 
 use App\Jobs\CheckAppStoreEveryTwoHoures;
-use ChangeState;
+ 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\Redis;
-
+use App\Events\ChangeState;
+const SUCCESS_STATUS_CODE = 200;
 class AppStoreStatus implements StatusContract
 {
     var Schedule $schedule;
@@ -20,11 +21,12 @@ class AppStoreStatus implements StatusContract
 
         $stausJsonResponse = json_decode($json);
 
+        dump("code ::" .$response->getStatusCode() );
  
         if($response->getStatusCode() == SUCCESS_STATUS_CODE)
         {
  
-            ChangeState::dispatch($stausJsonResponse["subscription"]);
+            if ($stausJsonResponse != null) ChangeState::dispatch($stausJsonResponse["subscription"]);
   
  
             return;

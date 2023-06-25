@@ -19,15 +19,15 @@ class AppStoreApiHandler
     }
     public function handle(App $app) 
     {
-        
+     
         //sends request to app store for get status
         $response = Http::get('http://appStore.com', [
-            'id' => $app->getID(),
-            'name' => $app->getName(),
+            'id' =>  $app['device_id'],
+            'name' =>  $app['name'],
         ]);
 
         $this->appStoreStatus->chacker($response , $app);
-        //checks two hours later
+  
 
 
         return $response->json();

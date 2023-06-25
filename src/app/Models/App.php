@@ -7,19 +7,22 @@ class App extends Model
 {
 
    
+    protected string $dviceId;
 
+    protected string $name;
+    protected string $platform;
 
-    public function setID(string $ID) : void
+    public function setDeviceId(string $dviceId) : void
     {
-        $this->ID = $ID; 
+        $this->dviceId = $dviceId; 
     }
 
     
 
 
-    public function getID() : string
+    public function getDeviceId() : string
     {
-         return $this->ID;
+         return $this->dviceId;
     }
 
 
