@@ -6,15 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class App extends Model
 {
 
-    protected string $ID ;
-
-    protected string $name ;
- 
-    public function __construct($ID,$name ){
-        $this->ID = $ID;
-        $this->name = $name;
-    }
-
+   
 
 
     public function setID(string $ID) : void
@@ -22,12 +14,27 @@ class App extends Model
         $this->ID = $ID; 
     }
 
+    
+
 
     public function getID() : string
     {
          return $this->ID;
     }
 
+
+    public function setPlatform(string $platform) : void
+    {
+        $this->platform = $platform; 
+    }
+
+    
+
+
+    public function getPlatform() : string
+    {
+         return $this->platform;
+    }
 
     public function setName(string $name) : void
     {
