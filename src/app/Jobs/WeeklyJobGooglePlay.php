@@ -16,14 +16,13 @@ class WeeklyJobGooglePlay implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    var App $app;
+
     /**
      * Create a new job instance.
      */
-    public function __construct(App $app)
+    public function __construct()
     {
-        $this->app = $app ;
-
+    
     }
 
     /**
@@ -31,8 +30,13 @@ class WeeklyJobGooglePlay implements ShouldQueue
      */
     public function handle(): void
     {
+    
+        $googlePlayApps = App::where('platform', 'google_play')->get();
 
+        foreach($googlePlayApps as $app){
+            GooglePlayFacade::handle($app);
+        }
         
-        GooglePlayFacade::handle($this->app);
+ 
     }
 }

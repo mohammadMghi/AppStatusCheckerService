@@ -3,11 +3,16 @@ namespace App\Domain;
 
 use App\Jobs\CheckAppStoreEveryTwoHoures;
 use ChangeState;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\Redis;
 
 class AppStoreStatus implements StatusContract
 {
-
+    var Schedule $schedule;
+    public function __construct(Schedule $schedule)
+    {
+        $this->schedule = $schedule;
+    }
     public function chacker($response , $app)
     {
 
@@ -16,7 +21,7 @@ class AppStoreStatus implements StatusContract
         $stausJsonResponse = json_decode($json);
 
  
-        if($response->getStatusCode() == 200)
+        if($response->getStatusCode() == SUCCESS_STATUS_CODE)
         {
  
             ChangeState::dispatch($stausJsonResponse["subscription"]);
@@ -26,7 +31,7 @@ class AppStoreStatus implements StatusContract
             
         } 
 
-
-        dispatch(new CheckAppStoreEveryTwoHoures($app));
+        $this->schedule->job(new CheckAppStoreEveryTwoHoures($app))->everyTwoHours();
+ 
     }
 }

@@ -14,14 +14,14 @@ use Illuminate\Queue\SerializesModels;
 class WeeklyJobAppstore implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-    var App $app;
+ 
     /**
      * Create a new job instance.
      */
-    public function __construct(App $app = null)
+    public function __construct( )
     {
-       
-        $this->app = $app ;
+        
+ 
     }
 
     /**
@@ -29,6 +29,10 @@ class WeeklyJobAppstore implements ShouldQueue
      */
     public function handle(): void
     {
-        AppStoreApiFacade::handle($this->app);
+        $appStoreApps = App::where('platform', 'google_play')->get();
+        foreach($appStoreApps as $app){
+            AppStoreApiFacade::handle($this->$app);
+        }
+
     }
 }
