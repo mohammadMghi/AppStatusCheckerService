@@ -36,7 +36,7 @@ class GooglePlayeStatus implements StatusContract
         } 
  
  
-        $this->schedule->job(new WeeklyJobAppstore($app))->hourly();
+        $this->schedule->job(new CheckGooglePlayHourlyJob($app))->hourly();
        
     }
 

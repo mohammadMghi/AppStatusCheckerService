@@ -29,7 +29,7 @@ class ChangeStateNotification{
     {
         $preStatus = Redis::get('subscription_status');
 
-        if($event == "expired" && $preStatus == "active") $this->emailHandler->send($event);
+        $this->emailHandler->send($event->status);
 
         $this->logStateHandler->store($event);
 

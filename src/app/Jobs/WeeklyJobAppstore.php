@@ -29,7 +29,7 @@ class WeeklyJobAppstore implements ShouldQueue
      */
     public function handle(): void
     {
-        $appStoreApps = App::where('platform', 'google_play')->get();
+        $appStoreApps = App::where('platform', 'IOS')->get();
         foreach($appStoreApps as $app){
             AppStoreApiFacade::handle($this->$app);
         }
