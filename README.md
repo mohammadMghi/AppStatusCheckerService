@@ -1,4 +1,34 @@
-# Dockerized Laravel based on [LEP](https://github.com/alireaza/lep)
+# Domain
+Implemented a subscription status synchronization service. It can check users' subscriptions of
+apps on app markets and update subscription status based on the results.
+
+# Installation
+You can run project with docker or your local envariment.
+For run on the docker check Dockerized part.
+Run on your local :
+```
+$ cd src
+$ cp .env.example .env //configure your env
+$ php artisan migrate
+$ php artisan db:seed
+// note : Configure the cron task scheduler laravel
+$ php artisan serve //run laravel with artisan
+```
+
+Run queue :
+```
+$ php artisan queue:work
+```
+Run scheduler :
+
+```
+$ php artisan schedule:run
+```
+
+//note :configure your redis to save logs in env
+
+
+## Dockerized Laravel based on [LEP](https://github.com/alireaza/lep)
 Laravel application in a Docker container
 
 ## Install
