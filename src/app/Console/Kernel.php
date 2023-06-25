@@ -19,9 +19,12 @@ class Kernel extends ConsoleKernel
  
         $schedule->job(new WeeklyJobAppstore())->everyMinute();
         $schedule->job(new WeeklyJobGooglePlay())->everyMinute();
-    
+ 
+ 
 
-  
+        // $schedule->job(new WeeklyJobAppstore())->weekly()->at('00:00');
+        // $schedule->job(new WeeklyJobGooglePlay())->weekly()->at('00:00');
+ 
         //and more
     }
 
