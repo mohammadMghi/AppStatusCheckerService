@@ -3,6 +3,7 @@
 namespace App\Facades\Handlers;
 
 use App\Domain\AppStoreStatus;
+use App\Domain\StatusContract;
 use App\Models\App;
 use App\Jobs\CheckAppStoreEveryTwoHoures;
 use App\Jobs\CheckHourlyJob;
@@ -13,7 +14,7 @@ class AppStoreApiHandler
 {
 
     var AppStoreStatus $appStoreStatus;
-    public function __construct(AppStoreStatus $appStoreStatus){
+    public function __construct(StatusContract $appStoreStatus){
         $this->appStoreStatus = $appStoreStatus;
     }
     public function handle(App $app) 
