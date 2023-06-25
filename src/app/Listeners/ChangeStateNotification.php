@@ -2,7 +2,9 @@
 
 namespace App\Listener;
 
+use App\Log\LogContract;
 use App\Log\LogStateHandler;
+use App\Notification\Email\EmailContract;
 use App\Notification\Email\EmailHandler;
 use ChangeState;
 use Illuminate\Support\Facades\Mail;
@@ -10,16 +12,16 @@ use Illuminate\Support\Facades\Redis;
 use Monolog\Handler\MailHandler;
 
 class ChangeStateNotification{
-    var EmailHandler $emailHandler; 
-    var LogStateHandler $logStateHandler;
+    var EmailHandler $email; 
+    var LogContract $logger;
     
     /**
      * Create the event listener.
      */
-    public function __construct(EmailHandler $emailHandler ,LogStateHandler $logStateHandler  )
+    public function __construct(EmailContract $email ,LogContract $logger  )
     {
-        $this->emailHandler  = $emailHandler;
-        $this->logStateHandler = $logStateHandler;
+        $this->email  = $email;
+        $this->logger = $logger;
     }
  
     /**
@@ -27,11 +29,11 @@ class ChangeStateNotification{
      */
     public function handle(ChangeState $event): void
     {
-        $preStatus = Redis::get('subscription_status');
+     
 
-        $this->emailHandler->send($event->status);
+        $this->email->send($event->status);
 
-        $this->logStateHandler->store($event);
+        $this->logger->store($event);
 
     }
 }

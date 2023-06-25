@@ -28,7 +28,7 @@ class StatusChange extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('jeffrey@example.com', 'Jeffrey Way'),
+            from: new Address('admin@example.com', 'admin'),
             subject: 'Status Change(active to expired)',
         );
     }
